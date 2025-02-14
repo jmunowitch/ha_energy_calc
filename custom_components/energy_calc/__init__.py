@@ -16,8 +16,7 @@ async def async_setup(hass, config):
 
 async def async_setup_entry(hass, config_entry):
 	"""Set up this integration using UI/YAML."""
-	config_entry.data = ensure_config(config_entry.data, hass)  # make sure that missing storage values will be default (const function)
-	config_entry.options = config_entry.data
+	hass.config_entries.async_update_entry(config_entry, data=config_entry.data, options=config_entry.data)
 	config_entry.add_update_listener(update_listener)
 	# Add sensor
 	hass.async_add_job(
